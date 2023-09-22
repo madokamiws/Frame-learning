@@ -1,38 +1,64 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class CountViewController : MonoBehaviour
+namespace FrameworkDesign
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CountViewController : MonoBehaviour
     {
-        transform.Find("btnadd").GetComponent<Button>().onClick.AddListener(() => {
+        // Start is called before the first frame update
+        void Start()
+        {
+            CounterModel.Count.OnValueChanged += OnCountChanged;
 
-            CounterModel.Count++;
-            UpdateView();
-        });
+            OnCountChanged(CounterModel.Count.Value);
+            transform.Find("btnadd").GetComponent<Button>().onClick.AddListener(() => {
 
-        transform.Find("btnsub").GetComponent<Button>().onClick.AddListener(() => {
-            CounterModel.Count--;
-            UpdateView();
+                new AddCountCommand().Execute();
+            });
 
-        });
+            transform.Find("btnsub").GetComponent<Button>().onClick.AddListener(() => {
+                new SubCountCommand().Execute();
+
+            });
+        }
+        private void OnCountChanged(int newcount)
+        {
+            transform.Find("CountText").GetComponent<Text>().text = newcount.ToString();
+        }
+        private void OnDestroy()
+        {
+            CounterModel.Count.OnValueChanged -= OnCountChanged;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+    }
+    public static class CounterModel
+    {
+        //private static int mCount = 0;
+        //public static int Count
+        //{
+        //    get => mCount;
+        //    set
+        //    {
+        //        if (value != mCount)
+        //        {
+        //            mCount = value;
+
+        //            OnCountChangeEvent.Trigger();
+
+        //        }
+        //    }
+        //}
+        public static BindableProperty<int> Count = new BindableProperty<int>()
+        {
+            Value = 0
+        };
     }
 
-
-    void UpdateView()
-    {
-        transform.Find("CountText").GetComponent<Text>().text = CounterModel.Count.ToString();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
-public static class CounterModel
-{
-    public static int Count = 0;
 }
