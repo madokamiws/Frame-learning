@@ -7,7 +7,7 @@ namespace FrameworkDesign
     {
         public void Execute()
         {
-            CounterModel.Count.Value++;
+            CounterApp.Get<CounterModel>().Count.Value++;
         }
     }
 }

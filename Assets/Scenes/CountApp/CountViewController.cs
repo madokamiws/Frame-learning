@@ -7,12 +7,14 @@ namespace FrameworkDesign
 {
     public class CountViewController : MonoBehaviour
     {
-        // Start is called before the first frame update
+        private CounterModel mCountModel;
         void Start()
         {
-            CounterModel.Count.OnValueChanged += OnCountChanged;
+             mCountModel = CounterApp.Get<CounterModel>();
 
-            OnCountChanged(CounterModel.Count.Value);
+            mCountModel.Count.OnValueChanged += OnCountChanged;
+
+            OnCountChanged(mCountModel.Count.Value);
             transform.Find("btnadd").GetComponent<Button>().onClick.AddListener(() => {
 
                 new AddCountCommand().Execute();
@@ -29,7 +31,7 @@ namespace FrameworkDesign
         }
         private void OnDestroy()
         {
-            CounterModel.Count.OnValueChanged -= OnCountChanged;
+            mCountModel.Count.OnValueChanged -= OnCountChanged;
         }
 
         // Update is called once per frame
@@ -38,7 +40,7 @@ namespace FrameworkDesign
 
         }
     }
-    public static class CounterModel
+    public class CounterModel
     {
         //private static int mCount = 0;
         //public static int Count
@@ -55,7 +57,7 @@ namespace FrameworkDesign
         //        }
         //    }
         //}
-        public static BindableProperty<int> Count = new BindableProperty<int>()
+        public BindableProperty<int> Count = new BindableProperty<int>()
         {
             Value = 0
         };
