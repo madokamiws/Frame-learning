@@ -6,16 +6,16 @@ namespace FrameworkDesign.Example
     {
         void Start()
         {
-            // ´´½¨Ò»¸ö IOC ÈİÆ÷
+            // åˆ›å»ºä¸€ä¸ª IOC å®¹å™¨
             var container = new IOCContainer();
 
-            // ×¢²áÒ»¸öÀ¶ÑÀ¹ÜÀíÆ÷µÄÊµÀı
+            // æ³¨å†Œä¸€ä¸ªè“ç‰™ç®¡ç†å™¨çš„å®ä¾‹
             container.Register(new BluetoothManager());
 
-            // ¸ù¾İÀàĞÍ»ñÈ¡À¶ÑÀ¹ÜÀíÆ÷µÄÊµÀı
+            // æ ¹æ®ç±»å‹è·å–è“ç‰™ç®¡ç†å™¨çš„å®ä¾‹
             var bluetoothManager = container.Get<BluetoothManager>();
 
-            //Á¬½ÓÀ¶ÑÀ
+            //è¿æ¥è“ç‰™
             bluetoothManager.Connect();
         }
 
@@ -23,7 +23,7 @@ namespace FrameworkDesign.Example
         {
             public void Connect()
             {
-                Debug.Log("À¶ÑÀÁ¬½Ó³É¹¦");
+                Debug.Log("è“ç‰™è¿æ¥æˆåŠŸ");
             }
         }
     }

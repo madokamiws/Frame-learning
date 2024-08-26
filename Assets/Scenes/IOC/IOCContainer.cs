@@ -6,12 +6,12 @@ namespace FrameworkDesign
     public class IOCContainer
     {
         /// <summary>
-        /// ÊµÀı
+        /// å®ä¾‹
         /// </summary>
         public Dictionary<Type, object> mInstances = new Dictionary<Type, object>();
 
         /// <summary>
-        /// ×¢²á
+        /// æ³¨å†Œ
         /// </summary>
         /// <param name="instance"></param>
         /// <typeparam name="T"></typeparam>
@@ -30,7 +30,7 @@ namespace FrameworkDesign
         }
 
         /// <summary>
-        /// »ñÈ¡
+        /// è·å–
         /// </summary>
         public T Get<T>() where T : class
         {

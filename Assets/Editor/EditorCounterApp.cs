@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-
+using FrameworkDesign;
 namespace FrameworkDesign.Editor
 {
     public class EditorCounterApp : EditorWindow
@@ -19,20 +19,20 @@ namespace FrameworkDesign.Editor
 
         private void OnGUI()
         {
-            //if (GUILayout.Button("+"))
-            //{
-            //    new AddCountCommand()
-            //        .Execute();
-            //}
+            if (GUILayout.Button("+"))
+            {
+                new AddCountCommand()
+                    .Execute();
+            }
 
-            ////  由于实时刷新 所以直接就就渲染数据即可
-            //GUILayout.Label(.Count.Value.ToString());
+            //  由于实时刷新 所以直接就就渲染数据即可
+            //GUILayout.Label(CounterModel.Count.Value.ToString());
 
-            //if (GUILayout.Button("-"))
-            //{
-            //    new SubCountCommand()
-            //        .Execute();
-            //}
+            if (GUILayout.Button("-"))
+            {
+                new SubCountCommand()
+                    .Execute();
+            }
         }
     }
 }
